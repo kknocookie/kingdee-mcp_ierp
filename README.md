@@ -1,26 +1,19 @@
-# kingdee-mcp-ierp
+# kingdee-mcp
 
-An MCP server for Kingdee-ierp queries.
+一个用于查询 Kingdee-ierp(金蝶云苍穹) 的 MCP 服务，基于 `uvx` 打包。
 
-## Features
+## 功能
 
-- Query sale orders
-- Query manufacturing orders
-- Query SO-MO relations
-- Query delivery risk
-- Query material shortage
-- Export SO-MO Excel report
+- 查询销售订单
+- 查询生产工单
+- 查询 SO-MO 关联关系
+- 查询交付风险
+- 查询物料短缺
+- 导出 SO-MO Excel 报表
 
-## Local Run
+## 环境变量
 
-```bash
-pip install kingdee-mcp-ierp
-kingdee-mcp-ierp
-```
-
-## Environment Variables
-
-Set these environment variables before starting the server:
+在启动服务之前，请先设置以下环境变量：
 
 ```powershell
 $env:KINGDEE_BASE_URL = "https://your-host/ierp/kapi"
@@ -31,7 +24,7 @@ $env:KINGDEE_ACCOUNT_ID = "your-account-id"
 $env:KINGDEE_LANGUAGE = "zh_CN"
 ```
 
-Required variables:
+必填变量：
 
 - `KINGDEE_BASE_URL`
 - `KINGDEE_CLIENT_ID`
@@ -39,25 +32,31 @@ Required variables:
 - `KINGDEE_USERNAME`
 - `KINGDEE_ACCOUNT_ID`
 
-Optional variables:
 
-- `KINGDEE_LANGUAGE` (defaults to `zh_CN`)
+## 第一步
+1.第三方应用——新增
+2.获取CLIENT_ID，CLIENT_SECRET，ACCOUNT_ID
 
-You can copy `.env.example` as a local reference, but do not commit your real credentials.
+## 第二步
 
-```powershell
-Copy-Item .env.example .env
+```bash
+pip install kingdee-mcp-ierp
 ```
 
-## Trae MCP Config
+## 第三步
 
-Install the package first with `pip install kingdee-mcp-ierp`, then configure your MCP client like this.
+设置配置
+
+## Trae MCP 配置
+
+你也可以直接复制 `.mcp.json.example`，然后填入你自己的配置值。
 
 ```json
 {
   "mcpServers": {
     "kingdee": {
-      "command": "kingdee-mcp-ierp",
+      "command": "uvx",
+      "args": ["kingdee-mcp-ierp"],
       "env": {
         "KINGDEE_BASE_URL": "https://your-host/ierp/kapi",
         "KINGDEE_CLIENT_ID": "your-client-id",
